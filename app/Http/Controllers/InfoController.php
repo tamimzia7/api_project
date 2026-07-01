@@ -45,50 +45,41 @@ class InfoController extends Controller
 
    
     function addinfo(Request $request){
-        $addinfo = new Addinfo();
+        $addinfo = new addinfo();
         $addinfo->id=$request->id;
         $addinfo->name=$request->name;
         $addinfo->email=$request->email;
         $addinfo->batch=$request->batch;
         if($addinfo->save()) {
-            return "KEK";
+            return response()->json(['message' => 'Data added successfully'], 200);
         } else {
-            return "HFJHFDGJB";
+            return response()->json(['message' => 'Failed to add data'], 500);
         }
         $addinfo->save();
      
     }
-    
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(info $info)
-    {
-        //
+    function update(Request $request, $id){
+        $info=new info();
+        $info->name=$request->name;
+        $info->email=$request->email;
+        $info->batch=$request->batch;
+        if($info->save()) {
+            return response()->json(['message' => 'Data updated successfully'], 200);
+        } else {
+            return response()->json(['message' => 'Failed to update data'], 500);
+        }
+    }
+    function updateinfo(Request $request, $id){
+        $addinfo = Addinfo::findorFail($id);
+        // $addinfo=new Addinfo();
+        $addinfo->name=$request->name;
+        $addinfo->email=$request->email;
+        $addinfo->batch=$request->batch;
+        $addinfo->save();
+         
+            return response()->json(['message' => 'Data updated successfully'], 200);
+        
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(info $info)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, info $info)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(info $info)
-    {
-        //
-    }
 }
