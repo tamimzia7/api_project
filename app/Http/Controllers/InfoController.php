@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\info;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Addinfo;
 
 class InfoController extends Controller
 {
@@ -40,6 +42,23 @@ class InfoController extends Controller
         $info->save();
         return "added successfully";
     }
+
+   
+    function addinfo(Request $request){
+        $addinfo = new Addinfo();
+        $addinfo->id=$request->id;
+        $addinfo->name=$request->name;
+        $addinfo->email=$request->email;
+        $addinfo->batch=$request->batch;
+        if($addinfo->save()) {
+            return "KEK";
+        } else {
+            return "HFJHFDGJB";
+        }
+        $addinfo->save();
+     
+    }
+    
 
     /**
      * Display the specified resource.
